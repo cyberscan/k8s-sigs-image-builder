@@ -1,9 +1,11 @@
 {
   "builders": [
     {
+      "account_file": "{{ user `service_account_key_file` }}",
       "disable_default_service_account": "{{ user `disable_default_service_account` }}",
       "image_family": "{{user `image_family` | clean_resource_name}}",
       "image_name": "{{user `image_name` | clean_resource_name}}",
+      "impersonate_service_account": "{{ user `impersonate_service_account` }}",
       "labels": {
         "build_timestamp": "{{user `build_timestamp`}}",
         "distribution": "{{user `distribution`}}",
@@ -13,10 +15,13 @@
       },
       "machine_type": "{{ user `machine_type` }}",
       "name": "{{user `build_name`}}",
+      "network": "{{ user `network` }}",
+      "network_project_id": "{{ user `network_project_id` }}",
       "project_id": "{{ user `project_id` }}",
       "service_account_email": "{{ user `service_account_email` }}",
       "source_image_family": "{{ user `source_image_family` }}",
-      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_username": "ubuntu",
+      "subnetwork": "{{ user `subnetwork` }}",
       "type": "googlecompute",
       "use_internal_ip": "{{ user `use_internal_ip`}}",
       "zone": "{{ user `zone` }}"
@@ -92,6 +97,7 @@
     "existing_ansible_ssh_args": "{{env `ANSIBLE_SSH_ARGS`}}",
     "image_family": "capi-{{user `build_name`}}-k8s-{{user `kubernetes_series`}}",
     "image_name": "cluster-api-{{user `build_name`}}-{{user `kubernetes_semver`}}-{{user `build_timestamp`}}",
+    "impersonate_service_account": "{{ env `GOOGLE_IMPERSONATE_SERVICE_ACCOUNT` }}",
     "kubernetes_cni_deb_version": null,
     "kubernetes_cni_http_source": null,
     "kubernetes_cni_rpm_version": null,
@@ -111,10 +117,14 @@
     "kubernetes_series": null,
     "kubernetes_source_type": null,
     "machine_type": "n1-standard-1",
+    "network": "",
+    "network_project_id": "",
     "project_id": "{{env `GCP_PROJECT_ID`}}",
     "service_account_email": "",
+    "service_account_key_file": "",
     "source_image_family": "{{user `source_image_family`}}",
     "use_internal_ip": "false",
+    "subnetwork": "",
     "zone": null
   }
 }
