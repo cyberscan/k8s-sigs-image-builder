@@ -5,6 +5,16 @@
       "account_file": "{{ user `service_account_key_file` }}",
       "disable_default_service_account": "{{ user `disable_default_service_account` }}",
       "image_family": "{{user `image_family` | clean_resource_name}}",
+      "image_labels": {
+        "build-date": "{{isotime `2006-01-02`}}",
+        "build-name": "{{user `build_name`}}",
+        "build-timestamp": "{{user `build_timestamp`}}",
+        "distribution": "ubuntu",
+        "distribution-release": "{{user `distribution_release`}}",
+        "distribution-version": "{{user `distribution_version`}}",
+        "kubernetes-series": "{{user `kubernetes_series` | clean_resource_name}}",
+        "kubernetes-version": "{{user `kubernetes_semver` | clean_resource_name}}"
+      },
       "image_name": "{{user `image_name` | clean_resource_name}}",
       "impersonate_service_account": "{{ user `impersonate_service_account` }}",
       "labels": {
